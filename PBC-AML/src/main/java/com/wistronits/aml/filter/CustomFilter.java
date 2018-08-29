@@ -13,8 +13,8 @@ import java.io.IOException;
  * @author gzp
  * @date 2018/8/24 17:33
  */
-@WebFilter(filterName = "customFilter", urlPatterns = "/token/*") public class CustomFilter
-		implements Filter {
+@WebFilter(filterName = "customFilter", urlPatterns = "/token/*")
+public class CustomFilter implements Filter {
 	private final Logger logger = LogManager.getLogger(getClass());
 
 	private FilterConfig filterConfig;
@@ -22,23 +22,26 @@ import java.io.IOException;
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 
-	@Override public void init(FilterConfig filterConfig) throws ServletException {
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
 		this.filterConfig = null;
 		System.out.println("过滤器初始化");
 	}
 
-	@Override public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
+	@Override
+	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
 			FilterChain filterChain) throws IOException, ServletException {
 		System.out.println("CustomFilter指定过滤器操作......");
 		chain = filterChain;
 		request = (HttpServletRequest) servletRequest;
 		response = (HttpServletResponse) servletResponse;
-		//todo
+		// todo
 
 		this.chain.doFilter(request, response);
 	}
 
-	@Override public void destroy() {
+	@Override
+	public void destroy() {
 		this.filterConfig = filterConfig;
 		System.out.println("过滤器销毁");
 	}
